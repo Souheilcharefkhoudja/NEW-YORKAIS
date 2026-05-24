@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Le New Yorkais — Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --paper: #ECE5DA;
+    --ink: #0A0808;
+    --red: #D81E2A;
+    --red-dark: #A2121C;
+    --muted: #58524A;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    /* Newsprint texture */
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.25 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .page {
+    max-width: 880px;
+    margin: 0 auto;
+    background: var(--paper);
+    border-left: 2px solid var(--ink);
+    border-right: 2px solid var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ========== MASTHEAD ========== */
+  .masthead {
+    border-bottom: 6px double var(--ink);
+    padding: 18px 32px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .masthead .back { color: var(--ink); text-decoration: none; }
+  .masthead .back:hover { color: var(--red); }
+  .masthead .date { color: var(--muted); }
+
+  /* ========== TITLE BLOCK ========== */
+  .title-block {
+    padding: 40px 32px 30px;
+    border-bottom: 2px solid var(--ink);
+    position: relative;
+  }
+  .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+  .title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(80px, 18vw, 200px);
+    line-height: 0.82;
+    letter-spacing: -2px;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+  .title .red { color: var(--red); }
+  .subtitle {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 1px;
+    margin-top: 14px;
+    text-transform: uppercase;
+    border-top: 1px solid var(--ink);
+    padding-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .subtitle .meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* ========== TABLE OF CONTENTS ========== */
+  .toc {
+    padding: 20px 32px;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .toc a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding: 2px 0;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .toc a:hover { color: var(--red); border-bottom-color: var(--red); }
+  .toc a .num {
+    color: var(--red);
+    margin-right: 6px;
+  }
+
+  /* ========== SECTION ========== */
+  section {
+    padding: 0;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-bar {
+    background: var(--red);
+    color: var(--paper);
+    padding: 14px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .section-bar .name {
+    font-size: 32px;
+    line-height: 1;
+  }
+  .section-bar .index {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 3px;
+    font-weight: 400;
+    opacity: 0.85;
+  }
+
+  /* ========== ITEMS ========== */
+  .items {
+    padding: 6px 0;
+  }
+  .item {
+    display: grid;
+    grid-template-columns: 92px 1fr auto;
+    align-items: center;
+    gap: 22px;
+    padding: 14px 32px;
+    border-bottom: 1px solid rgba(10,8,8,0.15);
+    transition: background 0.15s;
+  }
+  .item:last-child { border-bottom: none; }
+  .item:hover { background: rgba(216,30,42,0.06); }
+
+  .item-photo {
+    width: 92px;
+    height: 92px;
+    object-fit: cover;
+    display: block;
+    border: 1.5px solid var(--ink);
+    /* slight rotation to feel pasted in — only on hover */
+    transition: transform 0.2s;
+  }
+  .item:hover .item-photo {
+    transform: rotate(-1.5deg);
+  }
+
+  .item.no-photo {
+    grid-template-columns: 1fr auto;
+  }
+
+  .item-name {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1;
+    position: relative;
+    overflow: hidden;
+    /* Dotted leaders trick */
+    display: flex;
+    align-items: baseline;
+  }
+  .item-name::after {
+    content: " .................................................................................................................................";
+    color: var(--muted);
+    margin-left: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    flex: 1;
+    letter-spacing: 1px;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    transform: translateY(-4px);
+  }
+
+  .item-price {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--red);
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  .item-price .da {
+    font-size: 12px;
+    color: var(--ink);
+    margin-left: 4px;
+    font-weight: 400;
+  }
+
+  /* ========== COMBOS (FAMILY) ========== */
+  .combos {
+    padding: 22px 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0;
+    border-collapse: collapse;
+  }
+  .combo {
+    border: 1.5px solid var(--ink);
+    padding: 20px 18px;
+    text-align: left;
+    margin: -0.75px;
+    background: var(--paper);
+    transition: background 0.15s;
+  }
+  .combo:hover { background: var(--ink); color: var(--paper); }
+  .combo:hover .combo-label { color: var(--paper); }
+  .combo:hover .combo-price { color: var(--red); }
+
+  .combo-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+  .combo-items {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .combo-items .plus {
+    color: var(--red);
+    margin: 0 4px;
+  }
+  .combo-price {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 22px;
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid currentColor;
+    color: var(--red);
+  }
+  .combo-price .da {
+    font-size: 12px;
+    color: inherit;
+    opacity: 0.7;
+    margin-left: 4px;
+    font-weight: 400;
+  }
+
+  /* ========== FOOTER / COLOPHON ========== */
+  .colophon {
+    padding: 32px;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 2;
+  }
+  .colophon .big {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    color: var(--ink);
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+  .colophon .big .red { color: var(--red); }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 600px) {
+    .masthead { padding: 14px 18px 12px; font-size: 10px; }
+    .title-block { padding: 28px 18px 22px; }
+    .toc { padding: 16px 18px; }
+    .section-bar { padding: 12px 18px; }
+    .section-bar .name { font-size: 24px; }
+    .item { padding: 12px 18px; gap: 14px; grid-template-columns: 72px 1fr auto; }
+    .item-photo { width: 72px; height: 72px; }
+    .item-name { font-size: 20px; }
+    .item-name::after { font-size: 11px; }
+    .item-price { font-size: 16px; }
+    .combos { padding: 16px 18px; grid-template-columns: 1fr 1fr; }
+    .combo { padding: 14px 12px; }
+    .combo-items { font-size: 20px; }
+    .combo-price { font-size: 18px; }
+    .colophon { padding: 24px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <a class="back" href="index.html">← Retour</a>
+    <span class="date">N° 01 / DELY BRAHIM / ALGER</span>
+  </header>
+
+  <!-- TITLE -->
+  <div class="title-block">
+    <div class="eyebrow">★ NUMÉRO 1 DU SMASH BURGER EN ALGÉRIE</div>
+    <h1 class="title">LE<br>NEW<br><span class="red">YORKAIS</span></h1>
+    <div class="subtitle">
+      <span>The Menu — Hand-Smashed Daily</span>
+      <span class="meta">10H — 2H · 0557 37 72 51</span>
+    </div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <nav class="toc">
+    <a href="#boxes"><span class="num">01</span>Boxes</a>
+    <a href="#family"><span class="num">02</span>Family</a>
+    <a href="#smash"><span class="num">03</span>Smash</a>
+    <a href="#sandwich"><span class="num">04</span>Sandwiches</a>
+    <a href="#pasta"><span class="num">05</span>Pasta</a>
+    <a href="#sides"><span class="num">06</span>Sides</a>
+    <a href="#sweet"><span class="num">07</span>Dessert</a>
+  </nav>
+
+  <!-- BOXES -->
+  <section id="boxes">
+    <div class="section-bar">
+      <span class="name">Boxes</span>
+      <span class="index">No. 01 / 07</span>
+    </div>
+    <div class="items">
+      <div class="item">
+        <img class="item-photo" src="images/truffat-box.jpg" alt="">
+        <div class="item-name">Tuflato Box</div>
+        <div class="item-price">1800<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/E78E59BA-EEC9-459A-8509-85E121238D14.jpeg" alt="">
+        <div class="item-name">BBQ Box</div>
+        <div class="item-price">1200<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/crispy-box.jpg" alt="">
+        <div class="item-name">Crispy Box</div>
+        <div class="item-price">1800<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/B2AFE5AF-1F3D-4AB3-9A64-77957FC98845.jpeg" alt="">
+        <div class="item-name">Cheesy Bacon</div>
+        <div class="item-price">1500<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/90071CF4-A7FB-40EE-8391-5E051E3A6966.jpeg" alt="">
+        <div class="item-name">India Box</div>
+        <div class="item-price">1300<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/pink-lady-box.jpg" alt="">
+        <div class="item-name">Pink Lady</div>
+        <div class="item-price">1200<span class="da">DA</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAMILY -->
+  <section id="family">
+    <div class="section-bar">
+      <span class="name">Family &amp; Box</span>
+      <span class="index">No. 02 / 07</span>
+    </div>
+    <div class="combos">
+      <div class="combo">
+        <div class="combo-label">Family</div>
+        <div class="combo-items">4 Smash<br><span class="plus">+</span>12 Tenders</div>
+        <div class="combo-price">3800<span class="da">DA</span></div>
+      </div>
+      <div class="combo">
+        <div class="combo-label">Box · Trio</div>
+        <div class="combo-items">3 Smash<br><span class="plus">+</span>9 Tenders</div>
+        <div class="combo-price">3300<span class="da">DA</span></div>
+      </div>
+      <div class="combo">
+        <div class="combo-label">Box · Duo</div>
+        <div class="combo-items">2 Smash<br><span class="plus">+</span>6 Tenders</div>
+        <div class="combo-price">2500<span class="da">DA</span></div>
+      </div>
+      <div class="combo">
+        <div class="combo-label">Box · Solo</div>
+        <div class="combo-items">1 Smash<br><span class="plus">+</span>4 Tenders</div>
+        <div class="combo-price">1800<span class="da">DA</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SMASH -->
+  <section id="smash">
+    <div class="section-bar">
+      <span class="name">Smash Burgers</span>
+      <span class="index">No. 03 / 07</span>
+    </div>
+    <div class="items">
+      <div class="item">
+        <img class="item-photo" src="images/smash-l.jpg" alt="">
+        <div class="item-name">Smash L</div>
+        <div class="item-price">650<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/smash-xl-850.jpg" alt="">
+        <div class="item-name">Smash XL</div>
+        <div class="item-price">850<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/smash-xxl.jpg" alt="">
+        <div class="item-name">Smash XXL</div>
+        <div class="item-price">950<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/smash-crispy.jpg" alt="">
+        <div class="item-name">Smash Crispy</div>
+        <div class="item-price">650<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/smash-camembert.jpg" alt="">
+        <div class="item-name">Smash Camembert Miel</div>
+        <div class="item-price">850<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/smash-mushroom.jpg" alt="">
+        <div class="item-name">Smash Mushroom</div>
+        <div class="item-price">850<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/smash-bacon.jpg" alt="">
+        <div class="item-name">Smash Bacon</div>
+        <div class="item-price">850<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/smash-truffe.jpg" alt="">
+        <div class="item-name">Smash Truffe</div>
+        <div class="item-price">950<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/smash-egg.jpg" alt="">
+        <div class="item-name">Smash Egg</div>
+        <div class="item-price">750<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/smash-avocado.jpg" alt="">
+        <div class="item-name">Smash Avocado</div>
+        <div class="item-price">950<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/smash-bleu.jpg" alt="">
+        <div class="item-name">Smash Bleu</div>
+        <div class="item-price">850<span class="da">DA</span></div>
+      </div>
+      <div class="item">
+        <img class="item-photo" src="images/smash-pastrami.jpg" alt="">
+        <div class="item-name">Smash Pastrami</div>
+        <div class="item-price">1100<span class="da">DA</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SANDWICHES -->
+  <section id="sandwich">
+    <div class="section-bar">
+      <span class="name">Sandwiches</span>
+      <span class="index">No. 04 / 07</span>
+    </div>
+    <div class="items">
+      <div class="item no-photo">
+        <div class="item-name">Chessy Chiken</div>
+        <div class="item-price">650<span class="da">DA</span></div>
+      </div>
+      <div class="item no-photo">
+        <div class="item-name">Chessy Beef</div>
+        <div class="item-price">750<span class="da">DA</span></div>
+      </div>
+      <div class="item no-photo">
+        <div class="item-name">Crispy</div>
+        <div class="item-price">750<span class="da">DA</span></div>
+      </div>
+      <div class="item no-photo">
+        <div class="item-name">Le MIX</div>
+        <div class="item-price">950<span class="da">DA</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PASTA -->
+  <section id="pasta">
+    <div class="section-bar">
+      <span class="name">Pasta</span>
+      <span class="index">No. 05 / 07</span>
+    </div>
+    <div class="items">
+      <div class="item no-photo">
+        <div class="item-name">Pasta Fromagère</div>
+        <div class="item-price">650<span class="da">DA</span></div>
+      </div>
+      <div class="item no-photo">
+        <div class="item-name">Pasta Poulet</div>
+        <div class="item-price">950<span class="da">DA</span></div>
+      </div>
+      <div class="item no-photo">
+        <div class="item-name">Pasta Poulet Champignons</div>
+        <div class="item-price">1250<span class="da">DA</span></div>
+      </div>
+      <div class="item no-photo">
+        <div class="item-name">Pasta Poulet Fumé</div>
+        <div class="item-price">950<span class="da">DA</span></div>
+      </div>
+      <div class="item no-photo">
+        <div class="item-name">Pasta Truffato</div>
+        <div class="item-price">1500<span class="da">DA</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIDES -->
+  <section id="sides">
+    <div class="section-bar">
+      <span class="name">Sides</span>
+      <span class="index">No. 06 / 07</span>
+    </div>
+    <div class="items">
+      <div class="item no-photo">
+        <div class="item-name">Tenders</div>
+        <div class="item-price">750<span class="da">DA</span></div>
+      </div>
+      <div class="item no-photo">
+        <div class="item-name">Fries Chessy</div>
+        <div class="item-price">450<span class="da">DA</span></div>
+      </div>
+      <div class="item no-photo">
+        <div class="item-name">Fries Chessy Nuggets</div>
+        <div class="item-price">750<span class="da">DA</span></div>
+      </div>
+      <div class="item no-photo">
+        <div class="item-name">Fries Chessy Beef</div>
+        <div class="item-price">850<span class="da">DA</span></div>
+      </div>
+      <div class="item no-photo">
+        <div class="item-name">Mac &amp; Cheese Nuggets</div>
+        <div class="item-price">1250<span class="da">DA</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESSERT -->
+  <section id="sweet">
+    <div class="section-bar">
+      <span class="name">Dessert &amp; Drinks</span>
+      <span class="index">No. 07 / 07</span>
+    </div>
+    <div class="items">
+      <div class="item no-photo">
+        <div class="item-name">Tiramisu</div>
+        <div class="item-price">500<span class="da">DA</span></div>
+      </div>
+      <div class="item no-photo">
+        <div class="item-name">Jus</div>
+        <div class="item-price">300<span class="da">DA</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLOPHON -->
+  <footer class="colophon">
+    <div class="big">LE NEW <span class="red">YORKAIS</span></div>
+    Ain Allah · Dely Brahim · Alger<br>
+    Tous les jours 10H — 2H<br>
+    0557 37 72 51
+  </footer>
+
+</div>
+
+</body>
+</html>
