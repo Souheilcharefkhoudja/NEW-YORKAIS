@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Le New Yorkais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background:
+      radial-gradient(ellipse 60% 80% at 0% 50%, rgba(225,29,42,0.45) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 80% at 100% 50%, rgba(225,29,42,0.45) 0%, transparent 55%),
+      #0A0606;
+    color: #F5E9DE;
+    min-height: 100vh;
+    padding: 30px 16px;
+  }
+
+  .card {
+    max-width: 460px;
+    margin: 0 auto;
+    background: #0E0707;
+    border: 1.5px solid rgba(225,29,42,0.7);
+    border-radius: 22px;
+    padding: 40px 28px 28px;
+    box-shadow:
+      0 0 30px rgba(225,29,42,0.45),
+      0 0 80px rgba(225,29,42,0.25);
+  }
+
+  /* Logo */
+  .logo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #000;
+    margin: 0 auto 22px;
+    border: 1.5px solid rgba(225,29,42,0.8);
+    box-shadow: 0 0 20px rgba(225,29,42,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 38px;
+    color: #FFF6E5;
+    letter-spacing: -1px;
+  }
+
+  /* Brand */
+  h1 {
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 2.5px;
+    color: #FFF6E5;
+    text-shadow: 0 0 14px rgba(225,29,42,0.7);
+    margin-bottom: 14px;
+  }
+  .info {
+    text-align: center;
+    font-size: 14.5px;
+    margin: 4px 0;
+    color: #F5E9DE;
+  }
+  .info a { color: inherit; text-decoration: none; }
+
+  /* Buttons */
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    color: #FFF6E5;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+  }
+  .link.primary {
+    background: rgba(225,29,42,0.18);
+    border: 1.5px solid rgba(225,29,42,0.7);
+  }
+  .link.primary:hover {
+    background: rgba(225,29,42,0.3);
+    transform: translateY(-1px);
+  }
+  .link.secondary {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .link.secondary:hover {
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-1px);
+  }
+  .link svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+  /* Location */
+  .location {
+    text-align: center;
+    margin: 26px 0 12px;
+    color: #E11D2A;
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 2px;
+    font-size: 13px;
+  }
+  .map {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1.5px solid rgba(225,29,42,0.5);
+    height: 220px;
+  }
+  .map iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+  footer {
+    text-align: center;
+    margin-top: 22px;
+    color: #6e6555;
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="logo">N</div>
+
+  <h1>LE NEW YORKAIS</h1>
+
+  <div class="info">🔥 Smash Burgers • Dely Ibrahim</div>
+  <div class="info">🕐 10h - 2h • 📞 <a href="tel:+213557377251">0557 37 72 51</a></div>
+
+  <div class="links">
+
+    <a class="link primary" href="le-new-yorkais.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/>
+        <line x1="8" y1="9" x2="16" y2="9"/>
+        <line x1="8" y1="13" x2="16" y2="13"/>
+        <line x1="8" y1="17" x2="13" y2="17"/>
+      </svg>
+      Consulter le Menu
+    </a>
+
+    <a class="link primary" href="tel:+213557377251">
+      <svg viewBox="0 0 24 24" fill="#1FA0FF">
+        <path d="M20 15.5a16 16 0 0 1-7 1.5 16 16 0 0 1-7-7 16 16 0 0 1 1.5-7L9 1.5 5.5 5A2.5 2.5 0 0 0 5 7a18 18 0 0 0 12 12 2.5 2.5 0 0 0 2-.5L22.5 15z"/>
+      </svg>
+      Appeler &amp; Commander
+    </a>
+
+    <a class="link primary" href="mailto:contact@le-new-yorkais.dz">
+      <svg viewBox="0 0 24 24">
+        <rect x="2" y="5" width="20" height="14" rx="2" fill="#EA4335"/>
+        <path d="M3 6l9 6 9-6" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Nous contacter par Email
+    </a>
+
+    <a class="link secondary" href="https://instagram.com/le.new.yorkais" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#F58529"/>
+            <stop offset="50%" stop-color="#DD2A7B"/>
+            <stop offset="100%" stop-color="#8134AF"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig)"/>
+        <circle cx="12" cy="12" r="4" fill="none" stroke="#fff" stroke-width="2"/>
+        <circle cx="17.5" cy="6.5" r="1.2" fill="#fff"/>
+      </svg>
+      Instagram
+    </a>
+
+    <a class="link secondary" href="https://facebook.com/lenewyorkais" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24">
+        <rect x="2" y="2" width="20" height="20" rx="4" fill="#1877F2"/>
+        <path d="M14 8h2V5h-2.5C12 5 11 6 11 7.5V10H9v3h2v6h3v-6h2.2l.3-3H14V8z" fill="#fff"/>
+      </svg>
+      Facebook
+    </a>
+
+    <a class="link secondary" href="https://tiktok.com/@le.new.yorkais" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24">
+        <rect x="2" y="2" width="20" height="20" rx="4" fill="#000" stroke="rgba(255,255,255,0.2)"/>
+        <path d="M16 7.5a4 4 0 0 1-3-1.5v7a4 4 0 1 1-4-4v2.2A2 2 0 1 0 11 13V4h2a4 4 0 0 0 3 3.5z" fill="#fff"/>
+      </svg>
+      TikTok
+    </a>
+
+  </div>
+
+  <div class="location">📍 COOPÉRATIVE EL MOSTAKBEL, DELY IBRAHIM</div>
+  <div class="map">
+    <iframe
+      src="https://maps.google.com/maps?q=Ain+Allah+Dely+Brahim+Alger&t=&z=14&ie=UTF8&iwloc=&output=embed"
+      loading="lazy"
+      title="Le New Yorkais">
+    </iframe>
+  </div>
+
+  <footer>🍔 Le New Yorkais • Alger • 2026</footer>
+
+</div>
+
+</body>
+</html>
